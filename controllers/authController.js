@@ -174,9 +174,9 @@ exports.getPasswordResetView = (req, res, next) => {
     message = null;
   }
   res.render('auth/passwordResetView', {
-    path:         '/reset',
-    pageTitle:    'Reset Password',
-    errorMessage: message
+    path:           '/reset',
+    pageTitle:      'Reset Password',
+    errorMessage:   message
   });
 };
 
@@ -204,7 +204,7 @@ exports.postPasswordReset = (req, res, next) => {
           subject:  'Password reset confirmation',
           html: `
             <p>You requested a password reset</p>
-            <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>
+            <p>Click this <a href="https://cse341nodejsapp.herokuapp.com/reset/${token}">link</a> to set a new password.</p>
           `
         });
       })

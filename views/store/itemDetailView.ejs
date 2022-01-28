@@ -6,16 +6,20 @@
     <body>
         <%- include('../includes/navigationInclude.ejs') %>
         <main class="centered">
-            <h1><%= item.title %></h1>
-            <hr>
-            <div class="image">
-                <img src="<%= item.imageUrl %>" alt="<%= item.title %>">
-            </div>
-            <h2><%= item.price %></h2>
-            <p><%= item.description %></p>
-            <% if (isAuthenticated) { %>
-                <%- include('../includes/addToCartInclude.ejs', {item: item}) %>
-            <% } %>
+            <article class="card">
+                <h1><%= item.title %></h1>
+                <hr>
+                <div class="image">
+                    <img src="<%= item.imageUrl %>" alt="<%= item.title %>">
+                </div>
+                <div class="card__content">
+                    <h2><%= item.price %></h2>
+                    <p><%= item.description %></p>
+                    <% if (isAuthenticated) { %>
+                        <%- include('../includes/addToCartInclude.ejs', {item: item}) %>
+                    <% } %>
+                </div>
+            </article>
         </main>
         <%- include('../includes/javascriptInclude.ejs') %>
     </body>

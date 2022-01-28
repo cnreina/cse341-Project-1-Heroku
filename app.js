@@ -34,9 +34,9 @@
 
 
 require('dotenv').config();
-const express             = require('express');
-const session             = require('express-session');
-const bodyParser          = require('body-parser');
+const express                   = require('express');
+const session                   = require('express-session');
+const bodyParser                = require('body-parser');
 
 // MongoDB
 const mongoose                  = require('mongoose');
@@ -130,6 +130,7 @@ app.use((error, req, res, next) => {
 
 
 // ********** START SERVER
+console.log('Started Server (Port: ' + PORT + ')');
 mongoose.connect(MONGODB_CONNECTION_STRING, MONGODB_OPTIONS).then(result => {
   console.log('Started MongoDB');
   authController.startSendGrid();
