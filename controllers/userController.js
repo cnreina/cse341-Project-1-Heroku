@@ -25,11 +25,11 @@ exports.getAddItemView = (req, res, next) => {
 };
 
 exports.postAddItem = (req, res, next) => {
-  const title = req.body.title;
-  const image = req.file;
-  const price = req.body.price;
+  const title       = req.body.title;
+  const imageUrl    = req.body.imageUrl;
+  const price       = req.body.price;
   const description = req.body.description;
-  if (!image) {
+  if (!imageUrl) {
     return res.status(422).render('user/addItemView', {
       pageTitle: 'Add Item',
       path: '/user/add-item',
@@ -39,7 +39,7 @@ exports.postAddItem = (req, res, next) => {
         price: price,
         description: description
       },
-      errorMessage: 'Attached file is not an image.',
+      errorMessage: 'ERROR: Image Url is required',
       validationErrors: []
     });
   }
@@ -61,13 +61,12 @@ exports.postAddItem = (req, res, next) => {
     });
   }
 
-  const imageUrl = image.path;
   const item = new Item({
-    title: title,
-    price: price,
-    description: description,
-    imageUrl: imageUrl,
-    userId: req.user
+    title:        title,
+    price:        price,
+    description:  description,
+    imageUrl:     imageUrl,
+    userId:       req.user
   });
   item.save().then(result => {
       res.redirect('/user/item-list');
@@ -105,11 +104,11 @@ exports.getEditItemView = (req, res, next) => {
 };
 
 exports.postEditItem = (req, res, next) => {
-  const itemId        = req.body.itemId;
-  const updatedTitle  = req.body.title;
-  const updatedPrice  = req.body.price;
-  const image         = req.file;
-  const updatedDesc   = req.body.description;
+  const itemId            = req.body.itemId;
+  const updatedTitle      = req.body.title;
+  const updatedPrice      = req.body.price;
+  const updatedImageUrl   = req.body.imageUrl;
+  const updatedDesc       = req.body.description;
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -132,13 +131,11 @@ exports.postEditItem = (req, res, next) => {
       if (item.userId.toString() !== req.user._id.toString()) {
         return res.redirect('/');
       }
+
       item.title        = updatedTitle;
       item.price        = updatedPrice;
       item.description  = updatedDesc;
-      if (image) {
-        systemController.deleteFile(item.imageUrl);
-        item.imageUrl = image.path;
-      }
+      item.imageUrl     = updatedImageUrl;
       return item.save().then(result => {
         res.redirect('/user/item-list');
       });
@@ -174,7 +171,6 @@ exports.deleteItem = (req, res, next) => {
         console.log('deleteItem ERROR: ', item);
         return next(new Error('Item not found.'));
       }
-      systemController.deleteFile(item.imageUrl);
       return Item.deleteOne({ _id: itemId, userId: req.user._id });
     })
     .then(() => {
@@ -262,7 +258,7 @@ exports.postOrder = (req, res, next) => {
       });
       const order = new Order({
         user: {
-          email: req.user.email,
+          email:  req.user.email,
           userId: req.user
         },
         items: items
