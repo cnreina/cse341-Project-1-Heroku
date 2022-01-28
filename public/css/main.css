@@ -8,6 +8,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
+  background: rgb(223, 223, 236);
 }
 
 main {
@@ -34,7 +35,7 @@ form {
 .main-header {
   width: 100%;
   height: 3.5rem;
-  background-color: #030f31;
+  background-color: #00040e;
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
@@ -66,16 +67,19 @@ form {
   background: transparent;
   border: none;
   text-decoration: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.842);
   cursor: pointer;
 }
 
 .main-header__item a:hover,
+.main-header__item button:hover {
+  color: #ffeb90;
+}
+
 .main-header__item a:active,
 .main-header__item a.active,
-.main-header__item button:hover,
 .main-header__item button:active {
-  color: #ffc13b;
+  color: #ffd13b;
 }
 
 .mobile-nav {
@@ -189,6 +193,7 @@ form {
 
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  background: white;
 }
 
 .card__header,
@@ -230,7 +235,7 @@ form {
   text-decoration: none;
   font: inherit;
   border: 1px solid #00695c;
-  color: #00695c;
+  color: #bd9103;
   background: white;
   border-radius: 3px;
   cursor: pointer;
@@ -238,7 +243,7 @@ form {
 
 .btn:hover,
 .btn:active {
-  background-color: #00695c;
+  background-color: #c7a200;
   color: white;
 }
 
@@ -256,10 +261,10 @@ form {
 .user-message {
   margin: auto;
   width: 90%;
-  border: 1px solid #4771fa;
+  border: 1px solid #0930b1;
   padding: 0.5rem;
   border-radius: 3px;
-  background: #b9c9ff;
+  background: #b1bde2;
   text-align: center;
 }
 
@@ -276,16 +281,16 @@ form {
 
 .pagination a {
   text-decoration: none;
-  color: #00695c;
+  color: #f1a80bd8;
   padding: 0.5rem;
-  border: 1px solid #00695c;
+  border: 1px solid #b68c05;
   margin: 0 1rem;
 }
 
 .pagination a:hover,
 .pagination a:active,
 .pagination a.active {
-  background: #00695c;
+  background: #f0b106;
   color: white;
 }
 
