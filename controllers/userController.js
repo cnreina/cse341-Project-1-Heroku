@@ -284,7 +284,7 @@ exports.getCheckoutView = (req, res, next) => {
   let totalPrice = 0;
   req.user.populate('cart.items.itemId').execPopulate().then(user => {
       items       = user.cart.items;
-      totalPrice  = 0;
+      totalPrice  = 0.00;
       items.forEach(item => {
         totalPrice += item.quantity * item.itemId.price;
       });
@@ -294,7 +294,7 @@ exports.getCheckoutView = (req, res, next) => {
           return {
             name:         item.itemId.title,
             description:  item.itemId.description,
-            amount:       item.itemId.price * 100,
+            amount:       Math.round(item.itemId.price.toFixed(2)*100),
             currency:     'usd',
             quantity:     item.quantity
           };
