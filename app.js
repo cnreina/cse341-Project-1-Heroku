@@ -25,7 +25,6 @@
   heroku logs --tail
   heroku repo:reset --app appname
 
-
   https://devcenter.heroku.com/articles/preparing-a-codebase-for-heroku-deployment
   https://devcenter.heroku.com/articles/heroku-cli#download-and-install
   https://devcenter.heroku.com/articles/git#tracking-your-app-in-git
