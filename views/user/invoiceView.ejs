@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../includes/headInclude.ejs') %>
+    </head>
+    <body>
+        <%- include('../includes/navigationInclude.ejs') %>
+        <main class="centered">
+            <% if (!order) { %>
+                <h1>Order Not Found</h1>
+            <% } else { %>
+                <article class="invoice">
+                    <h1 class="invoice__item">Invoice</h1>
+                    <hr>
+                    <div>
+                        <h5 class="invoice__item">Order Number: <%= order._id%></h5>
+                        <h5 class="invoice__item">Order Date: <%= order.createdAt%></h5>
+                        <% let totalPrice = 0; %>
+                        <% order.items.forEach(item => { %>
+                            <% totalPrice += item.quantity * item.item.price; %>
+                            <div class="invoice__content">
+                                <div><p class="invoice__item">Item: <%= item.item.title %></p></div>
+                                <div><p class="invoice__item">Price: $<%= item.item.price %></p></div>
+                                <div><p class="invoice__item">Quantity: <%= item.quantity %></p></div>
+                                <div><p class="invoice__item">Total: $<%= item.quantity * item.item.price %></p></div>
+                                <div></div>
+                            </div>
+                        <% }); %>
+                        <h3 class="invoice__item">Order Total: $<%= totalPrice %></h3>
+                    </div>
+                    <hr>
+                </article>
+            <% } %>
+        </main>
+        <%- include('../includes/javascriptInclude.ejs') %>
+    </body>
+</html>

@@ -169,6 +169,24 @@ form {
   align-items: stretch;
 }
 
+.invoice {
+  margin: 5px;
+  padding-left: 10px;
+  text-align: left;
+}
+
+.invoice__content {
+  padding: 15px;
+  margin: 10px;
+  text-align: left;
+}
+
+.invoice__item {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }

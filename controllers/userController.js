@@ -354,47 +354,22 @@ exports.getCheckoutSuccess = (req, res, next) => {
 exports.getInvoiceView = (req, res, next) => {
   const orderId = req.params.orderId;
   Order.findById(orderId).then(order => {
-      if (!order) {
-        console.log('getInvoiceView ERROR: ', order);
-        return next(new Error('Order not found'));
-      }
-      if (order.user.userId.toString() !== req.user._id.toString()) {
-        console.log('getInvoiceView ERROR: Unauthorized');
-        return next(new Error('Unauthorized'));
-      }
-
-      const pdfDoc      = new PDFDocument();
-      const invoiceName = 'invoice-' + orderId + '.pdf';
-      const invoicePath = APP_CWD + '/data/invoices/' + invoiceName;
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'inline; filename="' + invoiceName + '"');
-      pdfDoc.pipe(fileObject.createWriteStream(invoicePath));
-      pdfDoc.pipe(res);
-      pdfDoc.fontSize(26);
-      pdfDoc.text('Invoice');
-      pdfDoc.moveTo(pdfDoc.x, pdfDoc.y).lineTo(pdfDoc.page.width - pdfDoc.x, pdfDoc.y).stroke();
-      pdfDoc.fontSize(12);
-      pdfDoc.text('               ');
-      pdfDoc.text('Email: ' + order.user.email);
-      pdfDoc.text('Date: ' + order.createdAt);
-      pdfDoc.text('               ');
-      let totalPrice = 0;
-      order.items.forEach(item => {
-        totalPrice += item.quantity * item.item.price;
-        pdfDoc.text('Item: ' + item.item.title);
-        pdfDoc.text('Price: $' + item.item.price);
-        pdfDoc.text('Quantity: ' + item.quantity);
-        pdfDoc.text('               ');
-      });
-      pdfDoc.fontSize(18);
-      pdfDoc.text('Total Price: $' + totalPrice);
-      pdfDoc.end();
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      console.log('getInvoiceView ERROR: ', error);
-      return next(error);
+    if (!order) {
+      console.log('getInvoiceView ERROR: ', order);
+      return next(new Error('Order not found'));
+    }
+    if (order.user.userId.toString() !== req.user._id.toString()) {
+      console.log('getInvoiceView ERROR: Unauthorized');
+      return next(new Error('Unauthorized'));
+    }
+    
+    res.render('user/invoiceView', {
+      pageTitle:        'Invoice',
+      path:             '/user/orders',
+      order:            order,
+      hasError:         false,
+      errorMessage:     null,
+      validationErrors: []
     });
+  });
 };
-
