@@ -32,9 +32,7 @@ Please answer the questions in this text file and submit it to I-Learn.
 
 4. Briefly describe any pieces of the assignment that are not yet working correctly.
 
-   This version is not up on heroku because i did not have time to figure out how to
-   handle the passing of the API keys. My app reads the keys from files, and these files
-   are in the gitignore list.
+   N/A
 
 
 5. Briefly describe the "coolest" thing you learned while completing this assignment.
@@ -59,6 +57,7 @@ Please answer the questions in this text file and submit it to I-Learn.
    Added extra fields to database items to record creation time. This is displayed
    in the pdf invoices.
    The pdf invoice displays in a clean and organized way, better than in the course videos.
+   Implemented CSS print style for invoices.
 
 
 Carlos N Reina
